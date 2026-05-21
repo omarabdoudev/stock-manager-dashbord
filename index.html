@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>StockManager — Interface Contrôle</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- navbar -->
+      <div class="navbar">
+        <div class="logo">
+          <span class="logo-icon">🏬</span>
+          <span class="logo-text">StockManager</span>
+        </div>
+        <button id="btn-open-add" class="btn-add">
+          <span>✨</span> + Ajouter un produit
+        </button>
+      </div>
+
+      <!-- Stats cards -->
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div id="stat-products" class="stat-value">14</div>
+          <div class="stat-label">📦 produits actifs</div>
+        </div>
+        <div class="stat-item">
+          <div id="stat-total" class="stat-value">3 280€</div>
+          <div class="stat-label">💰 valeur totale</div>
+        </div>
+        <div class="stat-item">
+          <div id="stat-out-of-stock" class="stat-value">3</div>
+          <div class="stat-label">⚠️ ruptures critiques</div>
+        </div>
+      </div>
+
+      <!-- Filtres -->
+      <div class="filter-section">
+        <div class="search-wrapper">
+          <span>🔎</span>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Rechercher un produit..."
+          />
+        </div>
+        <select id="filter-category" class="filter-select">
+          <option value="all">Toutes catégories</option>
+          <option value="Chaussures">Chaussures</option>
+          <option value="Vêtements">Vêtements</option>
+          <option value="Accessoires">Accessoires</option>
+          <option value="Électronique">Électronique</option>
+        </select>
+        <select id="filter-sort" class="filter-select">
+          <option value="default">Trier par défaut</option>
+          <option value="price-asc">Prix croissant</option>
+          <option value="price-desc">Prix décroissant</option>
+          <option value="stock-asc">Stock décroissant</option>
+        </select>
+      </div>
+
+      <!-- Grille produit -->
+      <div id="products-container" class="products-container">
+        <!--
+        <div class="product-card" data-product-id="1">
+          <div class="card-media">🥾</div>
+          <div class="card-content">
+            <div class="product-header">
+              <span class="product-name">Nike Air Max</span>
+              <span class="product-price">89.99€</span>
+            </div>
+            <div class="stock-info">📦 Stock: 12 unités</div>
+            <div class="card-actions">
+              <button class="action-btn edit" data-action="edit">
+                ✏️ Modifier
+              </button>
+              <button class="action-btn delete" data-action="delete">
+                🗑️ Supprimer
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-product-id="2">
+          <div class="card-media">👕</div>
+          <div class="card-content">
+            <div class="product-header">
+              <span class="product-name">T-shirt Urban</span>
+              <span class="product-price">24.99€</span>
+            </div>
+            <div class="stock-info">⚠️ Stock: 3 unités</div>
+            <div class="card-actions">
+              <button class="action-btn edit" data-action="edit">
+                ✏️ Modifier
+              </button>
+              <button class="action-btn delete" data-action="delete">
+                🗑️ Supprimer
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-product-id="3">
+          <div class="card-media">
+            🎧
+            <div class="rupture-tag">⚠️ RUPTURE</div>
+          </div>
+          <div class="card-content">
+            <div class="product-header">
+              <span class="product-name">Casque Pro X</span>
+              <span class="product-price">59.99€</span>
+            </div>
+            <div class="stock-info" style="color: #ff8a8a">
+              ❌ 0 unité - Épuisé
+            </div>
+            <div class="card-actions">
+              <button class="action-btn edit" data-action="edit">
+                ✏️ Modifier
+              </button>
+              <button class="action-btn delete" data-action="delete">
+                🗑️ Supprimer
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-product-id="4">
+          <div class="card-media">⌚</div>
+          <div class="card-content">
+            <div class="product-header">
+              <span class="product-name">SmartWatch S8</span>
+              <span class="product-price">149.99€</span>
+            </div>
+            <div class="stock-info">📦 Stock: 5 unités</div>
+            <div class="card-actions">
+              <button class="action-btn edit" data-action="edit">
+                ✏️ Modifier
+              </button>
+              <button class="action-btn delete" data-action="delete">
+                🗑️ Supprimer
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-product-id="5">
+          <div class="card-media">
+            ⌨️
+            <div class="rupture-tag">⚠️ RUPTURE</div>
+          </div>
+          <div class="card-content">
+            <div class="product-header">
+              <span class="product-name">Clavier Méca</span>
+              <span class="product-price">89.00€</span>
+            </div>
+            <div class="stock-info" style="color: #ff8a8a">💔 0 unité</div>
+            <div class="card-actions">
+              <button class="action-btn edit" data-action="edit">
+                ✏️ Modifier
+              </button>
+              <button class="action-btn delete" data-action="delete">
+                🗑️ Supprimer
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-product-id="6">
+          <div class="card-media">🎵</div>
+          <div class="card-content">
+            <div class="product-header">
+              <span class="product-name">Écouteurs BT</span>
+              <span class="product-price">34.99€</span>
+            </div>
+            <div class="stock-info">📦 Stock: 8 unités</div>
+            <div class="card-actions">
+              <button class="action-btn edit" data-action="edit">
+                ✏️ Modifier
+              </button>
+              <button class="action-btn delete" data-action="delete">
+                🗑️ Supprimer
+              </button>
+            </div>
+          </div>
+        </div>
+        -->
+      </div>
+      <footer>Interface admin — Gestion de stock</footer>
+    </div>
+
+    <!-- MODAL AJOUT -->
+    <div id="modal-add" class="modal-overlay-base hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>➕ Nouveau produit</h3>
+          <button id="btn-close-add" class="close-modal-btn">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="input-field">
+            <label>Nom du produit</label>
+            <input type="text" id="add-name" placeholder="Ex: Sac à dos" />
+          </div>
+          <div class="double-group">
+            <div class="input-field">
+              <label>Prix (€)</label>
+              <input type="number" id="add-price" placeholder="0.00" />
+            </div>
+            <div class="input-field">
+              <label>Quantité</label>
+              <input type="number" id="add-quantity" placeholder="stock" />
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Catégorie</label>
+            <select id="add-category">
+              <option>Électronique</option>
+              <option>Vêtements</option>
+              <option>Accessoires</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button id="btn-cancel-add" class="btn-cancel">Annuler</button>
+            <button id="btn-save-add" class="btn-save">Enregistrer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL EDITION -->
+    <div id="modal-edit" class="modal-overlay-base hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>✏️ Modifier le produit</h3>
+          <button id="btn-close-edit" class="close-modal-btn">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="input-field">
+            <label>Nom du produit</label>
+            <input
+              type="text"
+              id="edit-name"
+              value="Nike Air Max"
+              placeholder="Nom"
+            />
+          </div>
+          <div class="double-group">
+            <div class="input-field">
+              <label>Prix (€)</label>
+              <input type="number" id="edit-price" value="89.99" />
+            </div>
+            <div class="input-field">
+              <label>Quantité</label>
+              <input type="number" id="edit-quantity" value="12" />
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Catégorie</label>
+            <select id="edit-category">
+              <option>Électronique</option>
+              <option>Vêtements</option>
+              <option>Accessoires</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button id="btn-cancel-edit" class="btn-cancel">Annuler</button>
+            <button id="btn-save-edit" class="btn-save">Mettre à jour</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL SUPPRESSION -->
+    <div id="modal-delete" class="modal-overlay-base hidden">
+      <div class="modal-card delete-modal">
+        <div class="modal-header">
+          <h3>🗑️ Confirmation</h3>
+          <button id="btn-close-delete" class="close-modal-btn">✕</button>
+        </div>
+        <div class="modal-body">
+          <p style="color: #cbd5e6; margin-bottom: 10px">
+            Voulez-vous vraiment supprimer ce produit ?<br />Action
+            irréversible.
+          </p>
+          <div class="modal-footer">
+            <button id="btn-cancel-delete" class="btn-cancel">Annuler</button>
+            <button
+              id="btn-confirm-delete"
+              class="btn-save"
+              style="background: #ff3366; color: white"
+            >
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/app.js" type="module"></script>
+  </body>
+</html>
